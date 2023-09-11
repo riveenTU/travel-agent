@@ -1,0 +1,35 @@
+.card{
+    position: relative;
+    top: 73px;
+    float: left;
+    width: 268px;
+    background-color: #394867;
+    border-radius: 17px;
+    margin-left: 121px;
+    margin-top: 52px;
+    border: 0;
+    
+  }
+
+  .card h1{
+    color: #F1F6F9;
+    font-family: Barlow;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin: 0;
+  }
+  .card p{
+    color: #9BA4B5;
+    font-family: Barlow;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding-top: 20px;
+    padding-bottom: 17px;
+  }
+  
