@@ -3,7 +3,7 @@ import './MostPopular.css';
 
 function MostPopular(props){
     let image=props.image;
-    console.log(image);
+    
     return(
         <a href={props.link}>
            <div class="card">

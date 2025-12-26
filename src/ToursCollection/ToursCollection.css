@@ -1,0 +1,15 @@
+.name{
+    /* position: relative; */
+    height: 600px;
+    /* padding: 10px 7.3%; */
+}
+.name-h1{
+    margin-left: 7.3%;
+    margin-top: 50px;
+
+    font-family: Barlow;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

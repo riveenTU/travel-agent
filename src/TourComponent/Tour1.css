@@ -1,0 +1,376 @@
+.tour-section-1 img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  /* slightly darken the image so overlay text/card is readable */
+  filter: brightness(0.78) saturate(0.96);
+}
+
+.tour-section-1 {
+  width: 100%;
+  position: relative; /* make this the positioning context for absolute children */
+  min-height: 732px; /* hero height */
+  overflow: hidden;
+}
+
+/* Big left title over the image */
+.tour-section-1 h1{
+  position: absolute;
+  left: 7.3%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  margin: 0;
+
+  color: #2C3639;
+  font-family: Barlow, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: 128px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
+}
+
+/* translucent summary card on the right */
+.summary-section{
+  position: absolute;
+  right: 7.3%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46%;
+  max-width: 820px;
+  border-radius: 18px;
+  background: rgba(217,217,217,0.86);
+  padding: 42px 36px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+}
+
+.summary-section-h2{
+  display: block;
+}
+
+/* layout each summary row into two columns: title (left) and content (right) */
+.summary-section > div{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 28px;
+  align-items: start;
+}
+
+.summary-section .summary-section-h2{ /* ensure heading sits in left column */
+  grid-column: 1 / 2;
+}
+
+.summary-section ul,
+.summary-section p{
+  grid-column: 2 / 3;
+  margin: 0;
+}
+
+.summary-section ul{
+  padding-left: 18px;
+}
+
+.summary-section hr{
+  grid-column: 1 / -1; /* make separator span both columns */
+}
+
+.tour-section-1 h2{
+  margin: 0 0 12px 0;
+  color: #2C3639;
+  font-family: Nunito, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.tour-section-1 ul{
+  margin: 0;
+  padding-left: 20px;
+  color: #3F4E4F;
+  font-family: Nunito, sans-serif;
+  font-size: 18px;
+}
+
+.tour-section-1 p{
+  margin: 0;
+  color: #3F4E4F;
+  font-family: Nunito, sans-serif;
+  font-size: 18px;
+}
+
+/* separators inside the card */
+.summary-section hr{
+  border: 0;
+  border-top: 1px solid rgb(0, 0, 0);
+  margin: 20px 0;
+}
+
+/* small layout helpers inside the card */
+.summary-section .left-col{padding-right: 18px}
+.summary-section .right-col{padding-left: 18px}
+
+/* Book button styling moved slightly down when used inside the hero */
+.book-btn{ z-index: 3 }
+
+/* Responsive adjustments */
+/* @media (max-width: 992px){
+  .tour-section-1{
+    min-height: 520px;
+  }
+  .tour-section-1 h1{
+    font-size: 64px;
+    left: 6%;
+    top: 38%;
+  }
+  .summary-section{
+    position: static;
+    transform: none;
+    width: calc(100% - 40px);
+    margin: 18px auto;
+    top: auto;
+    right: auto;
+  }
+} */
+
+@media (max-width: 990px) {
+  .tour-section-1 {
+    min-height: 340px;
+    /* padding-top: 24px;
+    padding-bottom: 24px; */
+  }
+  .tour-section-1 img {
+    position: static;
+    width: 100vw;
+    height: 300px;
+    object-fit: cover;
+    filter: brightness(1);
+  }
+  .tour-section-1 h1 {
+    position: static;
+    font-size: 70px;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0;
+    padding-top: 30px;
+    padding-left: 10%;
+    /* text-align: center; */
+    background: rgba(217,217,217,0.98);
+
+  }
+  .summary-section {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    /* padding: 18px 8px; */
+    padding: 42px 10%;
+    background: rgba(217,217,217,0.98);
+    backdrop-filter: none;
+
+    position: static;
+    transform: none;
+    /* width: calc(100% - 40px); */
+    margin: auto;
+    top: auto;
+    right: auto;
+  }
+  /* .summary-section > div {
+    display: block;
+    gap: 0;
+  } */
+  .summary-section h2 {
+    font-size: 25px;
+    margin-bottom: 6px;
+  }
+  .summary-section ul,
+  .summary-section p {
+    font-size: 18px;
+    padding-left: 10px;
+  }
+  .summary-section hr {
+    margin: 12px 0;
+  }
+}
+
+/*********** Tour section 2 ************/
+.tour-section-2{
+    width: 100%;
+    height: auto;
+    position: relative; /* make this the positioning context for absolute children */
+    min-height: 600px; /* hero height */
+    overflow: hidden;
+}
+    
+.tour-section-2 h1{
+    font-family: Barlow;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+    position: relative;
+    left: 7.3%;
+    /* width: 200px; */
+    top: 60px;
+}
+.tour-section-2-content{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
+  position: relative;
+  top: 120px;
+  margin-left: 16%;
+  height: auto;
+}
+.tour-section-2 h2{
+    color: #A27B5C;
+    font-family: Nunito;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    width: 120px;
+    position: relative;
+    margin-bottom: 28px;
+    
+}
+.tour-section-2 p{
+    color: #000;
+    font-family: Nunito;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 600px;
+
+  /* allow text to flow naturally, constrain via container */
+    max-width: 620px;
+}
+.tour-image img{
+  display: block;
+  width: auto;
+  height: 573px;
+  max-width: 420px;
+  /* border-radius: 8px; */
+}
+
+/* layout helpers for new markup */
+.tour-text{
+    width: 400px;
+  /* flex: 1 1 0; */
+}
+.tour-image{
+  flex: 0 0 1020px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.date-navigation-section{
+    left: 16%;
+    position: relative;
+    width: 540px;
+}
+.date-navigation-box{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    /* top: 144px; */
+    /* bottom: 73px; */
+    /* left: 7.3%; */
+}
+.date-navigation{
+    display: inline-grid;
+    position: relative;
+    text-decoration: none;
+    height: 50px;
+    width: 50px;
+    border-radius: 0%;
+    background-color: #3F4E4F;
+    place-items: center;
+    /* border: 100px;
+    border-color: white; */
+    margin-bottom: 32px;
+    margin-left: 22px;
+
+    font-family: 'Bellefair';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+
+    letter-spacing: 2px;
+
+    color: white;
+}
+.date-navigation:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+.date-navigation-current{
+    background-color: #A27B5C;
+    color: white;
+}
+.date-navigation-title{
+    display: inline-block;
+}
+
+/***************** Book now ******************/
+.book-btn{
+    position: relative;
+    left: 16%;
+    margin: 20px 0;
+    
+    background-color: #3F4E4F;
+    border: 0;
+}
+.submit-btn{
+    background-color: #3F4E4F;
+    border: 0;
+}
+.hidden{
+    visibility: hidden;
+}
+.tour-section-2 form{
+    margin: 20px 16%;
+}
+
+@media (max-width: 900px){
+  .tour-section-2-content{
+    flex-direction: column;
+    top: 60px;
+    padding-left: 6%;
+    gap: 18px;
+  }
+  .tour-image{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .tour-image img{
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .tour-section-2 h1{ top: 20px; font-size: 48px }
+}
+
+.date-picker{
+    margin-top: 20px;
+    position: relative;
+    left: 16%;
+}
+
+
+/* end of file (no page gutter)
+   The hero is full-bleed under the site header/navbar. */

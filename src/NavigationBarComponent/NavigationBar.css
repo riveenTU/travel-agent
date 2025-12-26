@@ -1,0 +1,32 @@
+.navbar{
+    padding: 30px 7.3%;
+    min-height: 96px;
+    background-color: #DCD7C9;
+    color: white;
+}
+
+/* @media (max-width: 991px) {
+    .navbar-collapse {
+        padding: 1rem 0;
+    }
+    .nav-item {
+        padding: 0.5rem 18px;
+    }
+} */
+.nav-item{
+    padding: 0 18px;
+    font-family: inter;
+    
+}
+
+.carousel-item{
+    padding: 7% 15%;
+}
+
+/* Push content down when the menu is open
+.navbar {
+  transition: margin-bottom .3s ease;
+}
+.navbar:has(.collapse.show) {
+  margin-bottom: 200px; /* tune this to your expanded height */
+/* }  */
