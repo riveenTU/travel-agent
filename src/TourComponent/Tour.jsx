@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 // import "./Tour.css";
 import "./Tour1.css";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -17,24 +18,48 @@ import NavigationBar from "../NavigationBarComponent/NavigationBar";
 //     initialization();
 // },[])
 
-function Tour(props){
-    let image1 = props.tourDetails.image1
-    let listOfActivities = props.tourDetails.activities;
-    
-    //Date Navigation
-    const [currentActivity, setCurrentActivity] = useState([listOfActivities[0]]);
-    
-    function changeContent(date){
-        setCurrentActivity(
-             listOfActivities.filter((item, index)=>{
-                console.log("date "+index);
-                return date===index+1;
-            })
-        )
-    }
-    // console.log(currentActivity);
-    let image2 = currentActivity[0].image2;
+function Tour(){
+    // let image1 = props.tourDetails.image1
+    // let listOfActivities = props.tourDetails.activities;
 
+    const {id} = useParams();
+    const [tour, setTour] = useState(null);
+    //Date Navigation
+    const [currentActivity, setCurrentActivity] = useState(null);
+    useEffect(()=>{
+        async function fetchTour(){
+            try {
+                const res = await fetch(`http://localhost:4000/api/tours/${id}`);
+                const data = await res.json();
+                setTour(data);
+                setCurrentActivity(data.itinerary && data.itinerary.length ? data.itinerary[0] : null);
+            } catch (error) {
+                console.error("Error fetching tour data:", error);
+            }
+        }
+
+        fetchTour();
+    }, [id])
+    
+    
+    // function changeContent(date){
+    //     setCurrentActivity(
+    //          listOfActivities.filter((item, index)=>{
+    //             console.log("date "+index);
+    //             return date===index+1;
+    //         })
+    //     )
+    // }
+
+    function changeContent(day) {
+        setCurrentActivity(
+            listOfActivities.find(item => item.day === day)
+        );
+    }
+
+    // console.log(currentActivity);
+    
+    
 
 
     //Book now button visibility
@@ -50,7 +75,13 @@ function Tour(props){
         
     }
 
+    if(!tour || !currentActivity){
+        return <div>Loading...</div>;
+    }
 
+    const listOfActivities = tour.itinerary || [];
+    const image1 = tour.coverImage || "";
+    const image2 = currentActivity.image || "";
 
 
     return(
@@ -58,10 +89,10 @@ function Tour(props){
             <NavigationBar/>
             {/* Tour Section 1 */}
             <div className="tour-section-1 position-relative">
-                <img src={require(`${image1}`)} alt="..." srcset="" />
-                
+                <img src={`http://localhost:4000${image1}`} alt="cover" />
+
                 <div>
-                    <h1 className="">{props.tourDetails.tourName}</h1>
+                    <h1 className="">{tour.name}</h1>
                 </div>
                 <div className="summary-section">
                     <div>
@@ -69,8 +100,8 @@ function Tour(props){
                             <h2>Highlights</h2>
                         </div>
                         <ul>
-                            {props.tourDetails.highlights.map((item, index)=>{
-                                return <li>{item}</li>
+                            {tour.highlights && tour.highlights.map((item, index)=>{
+                                return <li key={index}>{item}</li>
                             })}
                         </ul>
                     </div>
@@ -80,8 +111,8 @@ function Tour(props){
                             <h2>What to bring</h2>
                         </div>
                         <ul>
-                            {props.tourDetails.whatToBring.map((item, index)=>{
-                                return <li>{item}</li>
+                            {tour.whatToBring && tour.whatToBring.map((item, index)=>{
+                                return <li key={index}>{item}</li>
                             })}
                         </ul>
                     </div>
@@ -90,7 +121,7 @@ function Tour(props){
                         <div className="summary-section-h2">
                             <h2>Suitable for</h2>
                         </div>
-                        <p>{props.tourDetails.suitableFor}</p>
+                        <p>{tour.suitableFor}</p>
                     </div>
                     <hr />
                     <div>
@@ -98,8 +129,8 @@ function Tour(props){
                             <h2>Includes</h2>
                         </div>
                         <ul>
-                            {props.tourDetails.includes.map((item, index)=>{
-                                return <li>{item}</li>
+                            {tour.includes && tour.includes.map((item, index)=>{
+                                return <li key={index}>{item}</li>
                             })}
                         </ul>
                     </div>
@@ -112,11 +143,11 @@ function Tour(props){
                 
                 <div className="tour-section-2-content">
                     <div className="tour-text">
-                        <h2>{currentActivity[0].city}</h2>
-                        <p>{currentActivity[0].description}</p>
+                        <h2>{currentActivity.city}</h2>
+                        <p>{currentActivity.description}</p>
                     </div>
-                    <div className="tour-image">
-                        <img src={require(`${image2}`)} alt="" />
+                        <div className="tour-image">
+                        <img src={`http://localhost:4000${image2}`} alt="activity" />
                     </div>
                 </div>
 
@@ -124,50 +155,50 @@ function Tour(props){
 
                 <div className="date-navigation-section">
                     <h2 className="date-navigation-title">Days</h2>
-                    <div class="date-navigation-box">
-                        {listOfActivities.map((item, index) =>{
-                            //console.log(index);
-                            return(item.day===currentActivity[0].day ? 
-                                    <div class="date-navigation date-navigation-current" >{item.day}</div>
+                    <div className="date-navigation-box">
+                        {listOfActivities.map((item) =>{
+                            return (item.day === currentActivity.day ?
+                                <div key={item.day} className="date-navigation date-navigation-current">{item.day}</div>
                                 :
-                                    <div class="date-navigation" onClick={()=>{changeContent(item.day)}}>{item.day}</div> )
+                                <div key={item.day} className="date-navigation" onClick={()=>{changeContent(item.day)}}>{item.day}</div>
+                            )
                         })}
                     </div>
                 </div>
 
 
                 {/* Book Now */}
-                <div class="collapse" id="collapseExample">
+                <div className="collapse" id="collapseExample">
                     <div>
                         <form method="POST" action="#">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Name</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-                                {/* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> */}
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
+                                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Email</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"></input>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputPassword1" className="form-label">Email</label>
+                                <input type="password" className="form-control" id="exampleInputPassword1" />
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Message</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputPassword1" className="form-label">Message</label>
+                                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1"></input>
-                                <label class="form-check-label" for="exampleCheck1">Sign me for the newsletter</label>
+                            <div className="mb-3 form-check">
+                                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                                <label className="form-check-label" htmlFor="exampleCheck1">Sign me for the newsletter</label>
                             </div>
                             <StaticDateRangePicker
                                 className="date-picker"
                                 shouldDisableDate={disabledDate}
                             />
-                            <button type="submit" class="btn btn-primary btn-lg btn-dark submit-btn">Submit</button>
+                            <button type="submit" className="btn btn-primary btn-lg btn-dark submit-btn">Submit</button>
                         </form>
                     </div>
                     
                 </div>
 
-                <a class={isVisible ? "book-btn btn btn-lg btn-dark" : "book-btn btn btn-lg btn-dark hidden"} onClick={handleClick} type="submit" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a className={isVisible ? "book-btn btn btn-lg btn-dark" : "book-btn btn btn-lg btn-dark hidden"} onClick={handleClick} type="submit" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Book now
                 </a>
             </div>

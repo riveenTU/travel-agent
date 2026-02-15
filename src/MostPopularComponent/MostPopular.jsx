@@ -6,13 +6,13 @@ function MostPopular(props){
     
     return(
         <a href={props.link}>
-           <div class="card">
-                <img src={require(`${image}`)} class="card-img-top" alt="..."></img>
-                <div class="card-body">
+           <div className="card">
+                <img src={require(`${image}`)} className="card-img-top" alt="..." />
+                <div className="card-body">
                     <h1>{props.heading}</h1>
-                    <p class="card-text">{props.content}</p>
+                    <p className="card-text">{props.content}</p>
                 </div>
-            </div> 
+            </div>
         </a>
         
         

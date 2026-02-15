@@ -126,6 +126,7 @@ function App() {
               />
           }/>
           <Route path='/tour' element={<Tour tourDetails={tourDetails}/>}/>
+          <Route path='/tour/:id' element={<Tour tourDetails={tourDetails}/>}/>
           <Route path='/packages' element={
             <ToursCollection mostPopularItems={mostPopularItems}/>
           }/>
