@@ -82,6 +82,7 @@ function Tour(){
     const listOfActivities = tour.itinerary || [];
     const image1 = tour.coverImage || "";
     const image2 = currentActivity.image || "";
+    // const coverSrc = image1 ? (image1.startsWith('http') ? image1 : `http://localhost:4000${image1}`) : '/images/image13.png';
 
 
     return(
@@ -89,7 +90,8 @@ function Tour(){
             <NavigationBar/>
             {/* Tour Section 1 */}
             <div className="tour-section-1 position-relative">
-                <img src={`http://localhost:4000${image1}`} alt="cover" />
+                {/* <img src={coverSrc} alt="cover" /> */}
+                <img src={tour.coverImage} alt="cover" />
 
                 <div>
                     <h1 className="">{tour.name}</h1>
@@ -147,7 +149,7 @@ function Tour(){
                         <p>{currentActivity.description}</p>
                     </div>
                         <div className="tour-image">
-                        <img src={`http://localhost:4000${image2}`} alt="activity" />
+                        <img src="/images/image14.png" alt="activity" />
                     </div>
                 </div>
 

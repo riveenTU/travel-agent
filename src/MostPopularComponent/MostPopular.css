@@ -3,9 +3,9 @@
     top: 73px;
     float: left;
     width: 268px;
-    background-color: #113946 ;
+    background-color: #22282b ;
     border-radius: 17px;
-    margin-left: 130px;
+    margin-left: 70px;
     margin-top: 52px;
     border: 0;
 
@@ -13,7 +13,7 @@
     
   }
 
-  .card h1{
+  .card-title{
     color: #F1F6F9;
     font-family: Barlow;
     font-size: 28px;
@@ -23,7 +23,7 @@
 
     margin: 0;
   }
-  .card p{
+  .card-text{
     color: #9BA4B5;
     font-family: Barlow;
     font-size: 20px;
@@ -33,5 +33,13 @@
 
     padding-top: 20px;
     padding-bottom: 17px;
+  }
+
+  .btn {
+    background-color: #A27B5C;
+  }
+  .btn:hover {
+    background-color: #8B6445;
+    color: black;
   }
   

@@ -1,8 +1,16 @@
 .navbar{
-    padding: 30px 7.3%;
+    padding: 0px 7.3%;
     min-height: 96px;
-    background-color: #DCD7C9;
-    color: white;
+    /* background-color: #DCD7C9; */
+    background-color: #22282b;
+    /* color: white; */
+}
+.navbar-brand img{
+    height: 100px;
+    width: auto;
+}
+.navbar-toggler-icon {
+    background-color: #A27B5C;
 }
 
 /* @media (max-width: 991px) {
@@ -15,8 +23,10 @@
 } */
 .nav-item{
     padding: 0 18px;
-    font-family: inter;
-    
+    font-family: inter;    
+}
+.nav-link{
+    color: #A27B5C;
 }
 
 .carousel-item{

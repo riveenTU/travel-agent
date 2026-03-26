@@ -1,20 +1,26 @@
 const mongoose = require('mongoose');
 
-const ActivitySchema = new mongoose.Schema({
+const ItinerarySchema = new mongoose.Schema({
     day: Number,
     city: String,
     description: String,
-    image2: String
+    image: String
 });
 
 const tourSchema = new mongoose.Schema({
-    tourname: String,
-    image1: String,
+    slug: String,
+    name: String,
+    duration: String,
+    coverImage: String,
+    link: String,
+    gallery: [String],
     highlights: [String],
     whatToBring: [String],
     suitableFor: String,
     includes: [String],
-    activities: [ActivitySchema]
+    itinerary: [ItinerarySchema],
+    isPopular: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Tour', tourSchema);

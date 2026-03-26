@@ -27,28 +27,18 @@ router.get('/', async (req, res) => {
  *     summary: Create a new tour
  */
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const tour = Tour.findById(req.params.id);
-//         res.json(tour);
-//     } catch (error) {
-//         res.status(404).json({message: error.message});
-//     }
-// });
-
-
 router.get('/:id', async (req, res) => {
-    try {
-        const tour = await Tour.findById(req.params.id);
+  try {
+    const tour = await Tour.findById(req.params.id);
 
-        if (!tour) {
-            return res.status(404).json({ message: "Tour not found" });
-        }
-
-        res.json(tour);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    if (!tour) {
+      return res.status(404).json({ message: "Tour not found" });
     }
+
+    res.json(tour);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;

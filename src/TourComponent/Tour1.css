@@ -23,11 +23,13 @@
   position: absolute;
   left: 7.3%;
   top: 50%;
+  width: 200px;
   transform: translateY(-50%);
   z-index: 2;
   margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 
-  color: #2C3639;
+  color: #F9F8F1;
   font-family: Barlow, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   font-size: 128px;
   font-weight: 400;
@@ -49,7 +51,7 @@
   background: rgba(217,217,217,0.86);
   padding: 42px 36px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(1px);
 }
 
 .summary-section-h2{
