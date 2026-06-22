@@ -41,4 +41,13 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/popular', async (req, res) => {
+  try {
+    const popularTours = await Tour.find().sort({ rating: -1, reviewsCount: -1 }).limit(4);
+    res.json(popularTours);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

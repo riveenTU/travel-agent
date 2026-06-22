@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import "./Tour.css";
 import "./Tour1.css";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { StaticDateRangePicker } from '@mui/x-date-pickers-pro/StaticDateRangePicker';
-import isBetween from 'dayjs/plugin/isBetween';
+// import isBetween from 'dayjs/plugin/isBetween';
 import NavigationBar from "../NavigationBarComponent/NavigationBar";
 
 // useEffect(()=>{
