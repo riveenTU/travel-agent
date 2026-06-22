@@ -27,6 +27,15 @@ router.get('/', async (req, res) => {
  *     summary: Create a new tour
  */
 
+router.get('/popular', async (req, res) => {
+  try {
+    const popularTours = await Tour.find().sort({ rating: -1, reviewsCount: -1 }).limit(4);
+    res.json(popularTours);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const tour = await Tour.findById(req.params.id);
@@ -41,13 +50,5 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/popular', async (req, res) => {
-  try {
-    const popularTours = await Tour.find().sort({ rating: -1, reviewsCount: -1 }).limit(4);
-    res.json(popularTours);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
 
 module.exports = router;
