@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import MostPopular from "../MostPopularComponent/MostPopular";
 import Comments from "../CommentsSection/Comments";
 import NavigationBar from "../NavigationBarComponent/NavigationBar";
 import "./Content.css";
 
 function Content(props){
+
+    const [popularTours, setPopularTours] = useState([]);
+
+    useEffect(() => {
+        async function fetchPopularTours() {
+            try {
+                const res = await fetch('http://localhost:4000/api/tours/popular');
+                const data = await res.json();
+                setPopularTours(data);
+            } catch (error) {
+                console.error("Error fetching popular tours:", error);
+            }
+        }
+        fetchPopularTours();
+    }, []);
+
     return(
         <div>
 
@@ -70,14 +86,14 @@ function Content(props){
                 
                 <h1 className="home-section-3-h1">Most Popular...</h1>
                 
-                {props.mostPopularItems.map((item, index)=>(
+                {popularTours.map((item, index)=>(
                     <MostPopular 
-                    key={index}
+                    key={item._id}
                     id={index}
-                    image={item.image}
-                    heading={item.heading}
-                    content={item.content}
-                    link={item.link}
+                    image={item.coverImage}
+                    heading={item.name}
+                    content={item.duration}
+                    link={`/tour/${item._id}`}
                     />
                 ))}
             

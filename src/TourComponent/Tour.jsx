@@ -145,7 +145,7 @@ function Tour(){
                 
                 <div className="tour-section-2-content">
                     <div className="tour-text">
-                        <h2>{currentActivity.city}</h2>
+                        <h2 className="width-200">{currentActivity.city}</h2>
                         <p>{currentActivity.description}</p>
                     </div>
                         <div className="tour-image">

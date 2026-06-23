@@ -373,6 +373,8 @@
     left: 16%;
 }
 
-
+.width-200{
+    width: 200px;
+}
 /* end of file (no page gutter)
    The hero is full-bleed under the site header/navbar. */
