@@ -11,9 +11,32 @@ const Tour = require('../models/Tour');
  *       200:
  *         description: List of tours
  */
+
+const CATEGORY_MAP = {
+  'cultural-triangle': 'Cultural Triangle',
+  'coast-beaches': 'Coast Beaches',
+  'hill-country': 'Hill Country',
+  'wildlife-nature': 'Wildlife Nature'
+};
+
+// GET /api/tours?category=cultural-triangle
+// GET /api/tours  (returns all)
 router.get('/', async (req, res) => {
   try {
-    const tours = await Tour.find();
+    const { category } = req.query;
+    const filter = {};
+
+    if (category) {
+      const mapped = CATEGORY_MAP[category.toLowerCase()];
+      if (!mapped) {
+        return res.status(400).json({
+          message: `Invalid category. Valid values: ${Object.keys(CATEGORY_MAP).join(', ')}`
+        });
+      }
+      filter.category = mapped;
+    }
+
+    const tours = await Tour.find(filter).sort({ createdAt: -1 });
     res.json(tours);
   } catch (err) {
     res.status(500).json({ message: err.message });
