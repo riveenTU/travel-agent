@@ -16,7 +16,7 @@ const CATEGORY_MAP = {
   'cultural-triangle': 'Cultural Triangle',
   'coast-beaches': 'Coast Beaches',
   'hill-country': 'Hill Country',
-  'wildlife-nature': 'Wildlife Nature'
+  'wildlife-nature': 'Wildlife and Nature'
 };
 
 // GET /api/tours?category=cultural-triangle
