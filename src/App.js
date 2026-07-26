@@ -8,33 +8,34 @@ import Content from './IndexContent/Content';
 import Footer from './FooterComponent/Footer';
 import Tour from './TourComponent/Tour';
 import ToursCollection from './ToursCollection/ToursCollection';
+import AdminApp from './Admin/AdminApp';
 
 
-const mostPopularItems = [
-  {
-    image: "/images/image13.png",
-    heading: "Blink",
-    content: "3 nights/ 4 days",
-    link: "/tour/69b22c9c8134df190aed7e3c"
-  },
-  {
-    image: "/images/sigiriya_rock.jpg",
-    heading: "Sigiriya Explorer",
-    content: "2 nights/ 3 days",
-    link: "/tour/69b22c9c8134df190aed7e38"
-  },
-  {
-    image: "/images/image7.png",
-    heading: "Pixie",
-    content: "4 nights/ 5 days",
-    link: "#"
-  },
-  {
-    image: "/images/image9.png",
-    heading: "Glorious Sri Lanka",
-    content: "4 nights/ 5 days"
-  }
-]
+// const mostPopularItems = [
+//   {
+//     image: "/images/image13.png",
+//     heading: "Blink",
+//     content: "3 nights/ 4 days",
+//     link: "/tour/69b22c9c8134df190aed7e3c"
+//   },
+//   {
+//     image: "/images/sigiriya_rock.jpg",
+//     heading: "Sigiriya Explorer",
+//     content: "2 nights/ 3 days",
+//     link: "/tour/69b22c9c8134df190aed7e38"
+//   },
+//   {
+//     image: "/images/image7.png",
+//     heading: "Pixie",
+//     content: "4 nights/ 5 days",
+//     link: "#"
+//   },
+//   {
+//     image: "/images/image9.png",
+//     heading: "Glorious Sri Lanka",
+//     content: "4 nights/ 5 days"
+//   }
+// ]
 
 const comments = [
   {
@@ -63,19 +64,19 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         {/* <NavigationBar/> */}
         <Routes>
-          <Route path='/' element={
-            <Content
-              mostPopularItems={mostPopularItems}
-              comments={comments}
-            />
-          } />
+          <Route path='/' element={<Content comments={comments}/>} />
           <Route path='/tour' element={<Tour />} />
           <Route path='/tour/:id' element={<Tour />} />
-          <Route path='/packages' element={
-            <ToursCollection mostPopularItems={mostPopularItems} />
-          } />
+          <Route path='/tours' element={<ToursCollection />} />
+          <Route path='/packages' element={<ToursCollection />} />
+
+          <Route path='/admin/*' element={<AdminApp />} />
         </Routes>
-        <Footer />
+
+        <Routes>
+          <Route path='/admin/*' element={null}/>
+          <Route path='*' element={<Footer />}/>
+        </Routes>
       </LocalizationProvider>
 
     </div>

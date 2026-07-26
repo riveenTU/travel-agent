@@ -1,0 +1,53 @@
+.ap-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.ap-section { display: flex; flex-direction: column; gap: 16px; }
+
+.ap-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ap-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #A27B5C;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ap-avatar-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #22282b;
+  margin: 0 0 4px;
+}
+.ap-avatar-role {
+  font-family: Barlow, sans-serif;
+  font-size: 12px;
+  color: #A27B5C;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+
+.ap-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 4px 0;
+}
+
+.ap-form { display: flex; flex-direction: column; gap: 14px; }
+
+@media (max-width: 760px) {
+  .ap-layout { grid-template-columns: 1fr; }
+}

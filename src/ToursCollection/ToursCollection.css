@@ -1,15 +1,208 @@
-.name{
-    /* position: relative; */
-    height: 600px;
-    /* padding: 10px 7.3%; */
+/* Page wrapper */
+.tc-page {
+  min-height: 100vh;
+  background-color: #f8f6f2;
+  padding: 48px 7.3% 80px;
 }
-.name-h1{
-    margin-left: 7.3%;
-    margin-top: 50px;
 
-    font-family: Barlow;
-    font-size: 80px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+/* Header */
+.tc-header {
+  margin-bottom: 32px;
 }
+.tc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 400;
+  color: #22282b;
+  margin: 0 0 8px;
+}
+.tc-subtitle {
+  font-family: Barlow, sans-serif;
+  font-size: 18px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Search bar */
+.tc-search-row {
+  margin-bottom: 20px;
+}
+.tc-search-wrap {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 16px;
+  max-width: 480px;
+  gap: 10px;
+}
+.tc-search-icon {
+  font-size: 16px;
+  color: #9BA4B5;
+}
+.tc-search-input {
+  border: none;
+  outline: none;
+  font-family: Barlow, sans-serif;
+  font-size: 15px;
+  color: #22282b;
+  flex: 1;
+  background: transparent;
+}
+.tc-clear-btn {
+  background: none;
+  border: none;
+  color: #A27B5C;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: Barlow, sans-serif;
+  padding: 0;
+}
+.tc-clear-btn:hover { color: #8B6445; }
+
+/* Category pills */
+.tc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.tc-pill {
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 1.5px solid #A27B5C;
+  background: transparent;
+  color: #A27B5C;
+  font-family: Barlow, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tc-pill:hover {
+  background: #A27B5C;
+  color: #fff;
+}
+.tc-pill-active {
+  background: #A27B5C;
+  color: #fff;
+}
+
+/* Results count */
+.tc-count {
+  font-family: Barlow, sans-serif;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+.tc-count-tag { color: #22282b; }
+
+/* Error */
+.tc-error {
+  background: #fff1f1;
+  border: 1px solid #f5c6cb;
+  border-radius: 10px;
+  padding: 20px 24px;
+  color: #721c24;
+  font-family: Barlow, sans-serif;
+}
+.tc-error-detail { font-size: 13px; opacity: 0.7; margin: 4px 0 0; }
+
+/* Empty state */
+.tc-empty {
+  text-align: center;
+  padding: 60px 0;
+  font-family: Barlow, sans-serif;
+  color: #6b7280;
+}
+.tc-empty p { font-size: 18px; margin-bottom: 16px; }
+
+/* Tour cards grid */
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* Tour card */
+.tc-card {
+  background: #22282b;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+.tc-card-img-wrap {
+  position: relative;
+}
+.tc-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.tc-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #A27B5C;
+  color: #fff;
+  font-size: 11px;
+  font-family: Barlow, sans-serif;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.tc-card-body {
+  padding: 16px 20px 20px;
+}
+.tc-card-category {
+  font-family: Barlow, sans-serif;
+  font-size: 11px;
+  color: #A27B5C;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.tc-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #F1F6F9;
+  margin: 6px 0 4px;
+}
+.tc-card-duration {
+  font-family: Barlow, sans-serif;
+  font-size: 14px;
+  color: #9BA4B5;
+  margin: 0 0 16px;
+}
+.tc-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tc-card-price {
+  font-family: Barlow, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #F1F6F9;
+}
+.tc-book-btn {
+  background: #A27B5C;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: Barlow, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tc-book-btn:hover { background: #8B6445; }
