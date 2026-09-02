@@ -3,11 +3,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 const NAV = [
-  { to: "/admin/dashboard", icon: "⊞", label: "Dashboard" },
-  { to: "/admin/packages",  icon: "🧳", label: "Packages"  },
-  { to: "/admin/audit-log", icon: "📋", label: "Audit Log" },
-  { to: "/admin/admins",    icon: "👥", label: "Admins", superOnly: true },
-  { to: "/admin/profile",   icon: "👤", label: "Profile"   },
+  { to: "/admin/dashboard", label: "Dashboard" },
+  { to: "/admin/packages", label: "Packages"  },
+  { to: "/admin/audit-log", label: "Audit Log" },
+  { to: "/admin/admins", label: "Admins", superOnly: true },
+  { to: "/admin/profile", label: "Profile"   },
 ];
 
 function Sidebar({ admin }) {
@@ -54,7 +54,7 @@ function Sidebar({ admin }) {
               "sidebar-link" + (isActive ? " sidebar-link-active" : "")
             }
           >
-            <span className="sidebar-link-icon">{n.icon}</span>
+            {/* <span className="sidebar-link-icon">{n.icon}</span> */}
             <span>{n.label}</span>
           </NavLink>
         ))}

@@ -101,3 +101,25 @@
 }
 .login-btn:hover:not(:disabled) { background: #8b6445; }
 .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Test credentials hint box */
+.login-hint {
+  background: #fdf8f5;
+  border: 1px solid #e9d8cb;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-family: Barlow, sans-serif;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.7;
+}
+.login-hint-title {
+  font-weight: 700;
+  color: #A27B5C;
+  margin: 0 0 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.login-hint p { margin: 0; }

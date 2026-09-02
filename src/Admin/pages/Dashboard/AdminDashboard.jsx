@@ -56,7 +56,7 @@ function AdminDashboard({ admin }) {
       <div className="admin-page-header">
         <div>
           <h1 className="admin-page-title">
-            Good {getGreeting()}, {admin?.name?.split(" ")[0] || "Admin"} 👋
+            Good {getGreeting()}, {admin?.name?.split(" ")[0] || "Admin"}
           </h1>
           <p className="admin-page-subtitle">Here's what's happening with your packages today.</p>
         </div>
