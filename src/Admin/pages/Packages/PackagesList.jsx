@@ -184,10 +184,10 @@ function PackagesList() {
                     </button>
                   </td>
                   <td className="pkg-actions">
-                    <button className="pkg-action-btn" onClick={() => navigate(`/admin/packages/preview/${pkg._id}`)} title="Preview">👁</button>
-                    <button className="pkg-action-btn" onClick={() => navigate(`/admin/packages/edit/${pkg._id}`)} title="Edit">✏️</button>
-                    <button className="pkg-action-btn" onClick={() => duplicatePackage(pkg)} title="Duplicate">⧉</button>
-                    <button className="pkg-action-btn pkg-action-delete" onClick={() => setToDelete(pkg._id)} title="Delete">🗑</button>
+                    <button className="pkg-action-btn" onClick={() => navigate(`/admin/packages/preview/${pkg._id}`)} title="Preview">Preview</button>
+                    <button className="pkg-action-btn" onClick={() => navigate(`/admin/packages/edit/${pkg._id}`)} title="Edit">Edit</button>
+                    <button className="pkg-action-btn" onClick={() => duplicatePackage(pkg)} title="Duplicate">Duplicate</button>
+                    <button className="pkg-action-btn pkg-action-delete" onClick={() => setToDelete(pkg._id)} title="Delete">Delete</button>
                   </td>
                 </tr>
               ))}

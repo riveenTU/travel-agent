@@ -98,8 +98,8 @@
 .popular-off { color: #d1d5db; }
 
 /* Action buttons */
-.pkg-actions { display: flex; gap: 6px; align-items: center; }
-.pkg-action-btn {
+/* .pkg-actions { display: flex; gap: 6px; align-items: center; } */
+/* .pkg-action-btn {
   background: none;
   border: 1px solid #e5e7eb;
   border-radius: 7px;
@@ -110,7 +110,7 @@
   line-height: 1;
 }
 .pkg-action-btn:hover { background: #f3f4f6; border-color: #d1d5db; }
-.pkg-action-delete:hover { background: #fef2f2; border-color: #fecaca; }
+.pkg-action-delete:hover { background: #fef2f2; border-color: #fecaca; } */
 
 /* Modal */
 .modal-overlay {
@@ -140,3 +140,65 @@
   margin: 0 0 24px;
 }
 .modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
+
+/* Action button text variants */
+.pkg-action-btn {
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: Barlow, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  line-height: 1;
+  color: #6b7280;
+  margin-right: 6px;
+}
+
+.pkg-action-btn:last-child {
+  margin-right: 0;
+}
+
+/* Preview — neutral blue */
+.pkg-action-btn[title="Preview"] {
+  color: #3b82f6;
+  border-color: #bfdbfe;
+}
+.pkg-action-btn[title="Preview"]:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+/* Edit — amber */
+.pkg-action-btn[title="Edit"] {
+  color: #d97706;
+  border-color: #fde68a;
+}
+.pkg-action-btn[title="Edit"]:hover {
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+/* Duplicate — purple */
+.pkg-action-btn[title="Duplicate"] {
+  color: #7c3aed;
+  border-color: #ddd6fe;
+}
+.pkg-action-btn[title="Duplicate"]:hover {
+  background: #f5f3ff;
+  border-color: #c4b5fd;
+}
+
+/* Delete — red */
+.pkg-action-btn[title="Delete"],
+.pkg-action-delete {
+  color: #ef4444;
+  border-color: #fecaca;
+}
+.pkg-action-btn[title="Delete"]:hover,
+.pkg-action-delete:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
