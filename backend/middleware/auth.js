@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const admin = require('../models/Admin');
+const jwt   = require('jsonwebtoken');
+const Admin = require('../models/Admin'); // ← uppercase A
 
 module.exports = async function auth(req, res, next) {
     try {
@@ -9,9 +9,10 @@ module.exports = async function auth(req, res, next) {
         }
 
         const token   = header.split(' ')[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET); // ← outside inner try
 
         const admin = await Admin.findById(decoded.id).select('-password');
+
         if (!admin || !admin.isActive) {
             return res.status(401).json({ message: 'Admin not found or deactivated.' });
         }
@@ -21,4 +22,4 @@ module.exports = async function auth(req, res, next) {
     } catch (err) {
         return res.status(401).json({ message: 'Invalid or expired token.' });
     }
-} 
+};
