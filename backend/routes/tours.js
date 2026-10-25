@@ -6,7 +6,7 @@ const CATEGORY_MAP = {
     'cultural-triangle': 'Cultural Triangle',
     'coast-beaches':     'Coast Beaches',
     'hill-country':      'Hill Country',
-    'wildlife-nature':   'Wildlife and Nature',  
+    'wildlife-nature':   'Wildlife Nature',  
 };
 
 // GET /api/tours
