@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/tours', tourRoutes);
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // Swagger definition
 // const swaggerOptions = {
