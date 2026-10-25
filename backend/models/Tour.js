@@ -15,6 +15,11 @@ const tourSchema = new mongoose.Schema({
         enum: ['Cultural Triangle', 'Coast Beaches', 'Hill Country', 'Wildlife Nature'],
         required: true
     },
+    status: {
+        type: String,
+        enum: ['draft', 'published'],
+        default: 'draft'
+    },
     duration: String,
     price: Number,
     currency: { type: String, default: 'USD' },
@@ -37,7 +42,6 @@ const tourSchema = new mongoose.Schema({
     rating: { type: Number, default: 0 },
     reviewsCount: { type: Number, default: 0 },
     link: String,
-    createdAt: { type: Date, default: Date.now }
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model('Tour', tourSchema);
