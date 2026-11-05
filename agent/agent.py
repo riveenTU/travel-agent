@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 from dotenv import load_dotenv
 from google import genai
@@ -14,6 +15,22 @@ client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 CATEGORIES = ["cultural-triangle", "coast-beaches", "hill-country", "wildlife-nature"]
 
+def parse_nights(duration):
+    """Turn '3 nights / 4 days' into 3. Returns None if it can't tell."""
+
+    if not duration:
+        return None
+
+    match = re.search(r"(\d+)\s*nights?", duration, re.IGNORECASE)
+
+    if match:
+        return int(match.group(1))
+
+    match = re.search(r"(\d+)\s*days?", duration, re.IGNORECASE)
+    if match:
+        return max(int(match.group(1)) - 1, 0)  # '4 days' means 3 nights
+
+    return None
 
 # ---------- The tool: normal Python that calls your Express API ----------
 
