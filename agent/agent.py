@@ -123,25 +123,69 @@ search_tours_declaration = {
     },
 }
 
+propose_plan_declaration = {
+    "name": "propose_plan",
+    "description": (
+        "Submit your final trip plan. Always use this instead of listing tours in text. "
+        "The system checks the plan and replies with the result."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "month": {
+                "type": "string",
+                "description": "The travel month the user asked for, e.g. 'February'.",
+            },
+            "trip_days": {
+                "type": "integer",
+                "description": "The trip length in days that the user asked for.",
+            },
+            "stops": {
+                "type": "array",
+                "description": "The tours, in the order they would be done.",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "tour_id": {"type": "string", "description": "id from search_tours"},
+                        "reason": {"type": "string", "description": "One short line on why it fits."},
+                    },
+                    "required": ["tour_id", "reason"],
+                },
+            },
+        },
+        "required": ["month", "trip_days", "stops"],
+    },
+}
+
 SYSTEM_PROMPT = """You are a trip-planning assistant for Ceylon Tours, a Sri Lanka tour company.
 Rules:
 - Always call search_tours before recommending anything.
 - Only recommend tours returned by search_tours. Never invent tours, prices or details.
-- When you recommend a tour, give its name and id.
-- If nothing matches, or the tool returns an error, say so plainly.
+- To recommend tours, call propose_plan. Do not list tours in plain text.
+- After propose_plan replies, write a short friendly summary for the user.
+- If nothing matches, or a tool returns an error, say so plainly.
 """
 
 config = types.GenerateContentConfig(
     system_instruction=SYSTEM_PROMPT,
-    tools=[types.Tool(function_declarations=[search_tours_declaration])],
+    tools=[types.Tool(function_declarations=[search_tours_declaration, propose_plan_declaration])],
 )
 
-TOOLS = {"search_tours": search_tours}
+TOOLS = {"search_tours": search_tours, "propose_plan": propose_plan}
 
+def summarise(result):
+    """One short line for the [tool] log."""
+    if "count" in result:
+        return f"{result['count']} tours"
+    if "ok" in result:
+        return "plan ok" if result["ok"] else f"plan rejected: {result['errors']}"
+    return result.get("error")    
 
 # ---------- The agent loop ----------
 
 def run_agent(contents):
+    """Returns (reply_text, plan). plan is None if the model didn't make one."""
+    plan = None
     for step in range(MAX_STEPS):
         response = client.models.generate_content(
             model=MODEL, contents=contents, config=config
@@ -150,21 +194,27 @@ def run_agent(contents):
         contents.append(response.candidates[0].content)
 
         if not response.function_calls:
-            return response.text or "(no reply)"  # plain text = finished
+            return response.text or "(no reply)", plan  # plain text = finished
 
         parts = []
         for call in response.function_calls:
             args = dict(call.args or {})
             print(f"  [tool] {call.name}({args})")
+            
             tool = TOOLS.get(call.name)
             result = tool(**args) if tool else {"error": f"Unknown tool {call.name}"}
-            print(f"  [tool] -> {result.get('count', result.get('error'))}")
+            print(f"  [tool] -> {summarise(result)}")
+            
+            if call.name == "propose_plan" and result.get("ok"):
+                plan = result["plan"]  # keep the version built by code
+            
             parts.append(types.Part.from_function_response(name=call.name, response=result))
 
         # Send the tool results back as the next message
         contents.append(types.Content(role="user", parts=parts))
 
-    return "Sorry, I couldn't finish planning that. Please try rephrasing."
+    return "Sorry, I couldn't finish planning that. Please try rephrasing.", plan
+
 
 
 def main():
