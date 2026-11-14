@@ -59,6 +59,7 @@ def search_tours(category=None, month=None):
             "name": t.get("name"),
             "category": t.get("category"),
             "duration": t.get("duration"),
+            "nights": parse_nights(t.get("duration")),
             "price": f'{t.get("currency", "USD")} {t.get("price")}',
             "startCity": location.get("startCity"),
             "endCity": location.get("endCity"),
@@ -215,20 +216,34 @@ def run_agent(contents):
 
     return "Sorry, I couldn't finish planning that. Please try rephrasing.", plan
 
+def print_plan(plan):
+    """Print the plan from code's numbers, not from the model's text."""
 
+    print(f"\n=== Plan: {plan['trip_days']} days in {plan['month']} ===")
+    
+    for i, s in enumerate(plan["stops"], 1):
+        name = s["name"] or f"UNKNOWN TOUR {s['tour_id']}"
+        print(f"  {i}. {name} ({s['nights']} nights): {s['reason']}")
+    
+    print(f"  Tours add up to {plan['total_nights']} nights. The trip has {plan['trip_nights']} nights.")
 
 def main():
     print("Ceylon Tours trip planner. Type 'quit' to exit.\n")
     contents = []  # the whole conversation, so follow-ups keep their context
     while True:
         user = input("You: ").strip()
+
         if user.lower() in ("quit", "exit"):
             break
         if not user:
             continue
+        
         contents.append(types.Content(role="user", parts=[types.Part(text=user)]))
-        print(f"\nAgent: {run_agent(contents)}\n")
-
+        
+        reply, plan = run_agent(contents)
+        if plan:
+            print_plan(plan)
+        print(f"\nAgent: {reply}\n")
 
 if __name__ == "__main__":
     main()
