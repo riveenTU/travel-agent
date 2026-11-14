@@ -9,7 +9,7 @@ load_dotenv()
 
 MODEL = os.environ["GEMINI_MODEL"]
 API_URL = os.environ.get("TOURS_API_URL", "http://localhost:4000")
-MAX_STEPS = 5  # safety limit: stops the loop running (and costing) forever
+MAX_STEPS = 8  # safety limit: stops the loop running (and costing) forever
 
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
@@ -67,6 +67,35 @@ def search_tours(category=None, month=None):
         })
     return {"count": len(results), "tours": results}
 
+def propose_plan(month, trip_days, stops):
+    """Look up each proposed tour in the real data and work out the totals in code."""
+    data = search_tours()  # published tours only: this is the source of truth
+
+    if "error" in data:
+        return {"ok": False, "errors": [data["error"]]}
+    tours_by_id = {t["id"]: t for t in data["tours"]}
+
+    plan_stops = []
+
+    for stop in stops:
+        tour = tours_by_id.get(stop.get("tour_id"))
+        plan_stops.append({
+            "tour_id": stop.get("tour_id"),
+            "name": tour["name"] if tour else None,
+            "nights": tour["nights"] if tour else None,
+            "reason": stop.get("reason", "")
+        })
+    
+    trip_days = int(trip_days)
+    plan = {
+        "month": month,
+        "trip_days": trip_days,
+        "trip_nights": trip_days - 1,
+        "total_nights": sum(s["nights"] or 0 for s in plan_stops),
+        "stops": plan_stops
+    }
+
+    return {"ok": True, "plan": plan}
 
 # ---------- Describing the tool to the model ----------
 # The model never sees the Python code, only this description.
